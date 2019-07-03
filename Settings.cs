@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace task1
 {
@@ -25,7 +26,23 @@ namespace task1
             Port = port;
             AutoConnect = autoConnect;
         }
+
+        public static Settings GetSettingFields(TextBox t1, TextBox t2, CheckBox cb1)
+        {
+            Settings s = new Settings(t1.Text, t2.Text, cb1.Checked);
+
+            //MessageBox.Show(s.Ip+" "+s.Port+" "+s.AutoConnect);
+            return s;
+        }
+        public static void SetSettingFields(Settings s, TextBox t1, TextBox t2, CheckBox cb1)
+        {
+            t1.Text = s.Ip;
+            t2.Text = s.Port;
+            cb1.Checked = s.AutoConnect;
+
+        }
     }
     
-    
+
+
 }

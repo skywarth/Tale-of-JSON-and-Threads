@@ -32,7 +32,7 @@ namespace task1
         private void MakeConnection()
         {
             
-            bool serializeStatus=j.SerializeJSON(GetSettingFields());
+            bool serializeStatus=j.SerializeJSON(Settings.GetSettingFields(textBox1,textBox2,checkBox1));
             if (serializeStatus)
             {
                 MessageBox.Show("success");
@@ -44,20 +44,7 @@ namespace task1
             
         }
 
-        private Settings GetSettingFields()
-        {
-            Settings s = new Settings(textBox1.Text, textBox2.Text, checkBox1.Checked);
-            
-            //MessageBox.Show(s.Ip+" "+s.Port+" "+s.AutoConnect);
-            return s;
-        }
-        private void SetSettingFields(Settings s)
-        {
-            textBox1.Text = s.Ip;
-            textBox2.Text = s.Port;
-            checkBox1.Checked = s.AutoConnect;
-
-        }
+        
 
         private void Button2_Click(object sender, EventArgs e)
         {
@@ -79,8 +66,9 @@ namespace task1
             Settings currSet = (Settings)j.DeserializeJSON();
             if (currSet.AutoConnect)
             {
-                SetSettingFields(currSet);
+                Settings.SetSettingFields(currSet,textBox1,textBox2,checkBox1);
             }
+            
         }
     }
 }
