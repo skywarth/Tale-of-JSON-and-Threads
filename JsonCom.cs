@@ -19,7 +19,7 @@ namespace task1
                 List<Settings> items = JsonConvert.DeserializeObject<List<Settings>>(json);
             }
         }*/
-        private string SerializeObject(Object o)
+        private string SerializeObject(Settings o)
         {
             string jsonText="";
             if (o.GetType() == typeof(Settings)){
@@ -33,7 +33,7 @@ namespace task1
             return jsonText;
         }
 
-        public bool SerializeJSON(Object o)
+        public bool SerializeJSON(Settings o)
         {
             bool status=false;
             JsonSerializer serializer = new JsonSerializer();
@@ -47,7 +47,7 @@ namespace task1
             {
                 try
                 {
-                    using (StreamWriter file = File.CreateText(@"..\settings.json"))
+                    using (StreamWriter file = File.CreateText(o.FilePath))
                     {
 
                         serializer.Serialize(file, jsonText);
@@ -62,6 +62,11 @@ namespace task1
                 }
             }
             return status;
+        }
+
+        public Settings DeserializeJSON()
+        {
+
         }
 
     }

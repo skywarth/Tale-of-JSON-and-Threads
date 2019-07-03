@@ -12,9 +12,12 @@ namespace task1
         private string port;
         private bool autoConnect;
 
+        private static string filePath = @"..\settings.json";
+
         public string Ip { get => ip; set => ip = value; }
         public string Port { get => port; set => port = value; }
         public bool AutoConnect { get => autoConnect; set => autoConnect = value; }
+        public string FilePath { get => filePath; set => filePath = value; }
 
         public Settings(string ip, string port, bool autoConnect)
         {

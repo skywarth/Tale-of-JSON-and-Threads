@@ -29,8 +29,15 @@ namespace task1
         private void MakeConnection()
         {
             JsonCom j1 = new JsonCom();
-            j1.SerializeJSON(GetSettingFields());
-
+            bool serializeStatus=j1.SerializeJSON(GetSettingFields());
+            if (serializeStatus)
+            {
+                MessageBox.Show("success");
+            }
+            else
+            {
+                MessageBox.Show("Error");
+            }
             
         }
 
@@ -38,7 +45,7 @@ namespace task1
         {
             Settings s = new Settings(textBox1.Text, textBox2.Text, checkBox1.Checked);
             
-            MessageBox.Show(s.Ip+" "+s.Port+" "+s.AutoConnect);
+            //MessageBox.Show(s.Ip+" "+s.Port+" "+s.AutoConnect);
             return s;
         }
 
