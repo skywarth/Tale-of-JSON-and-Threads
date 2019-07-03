@@ -17,7 +17,7 @@ namespace task1
         public string Ip { get => ip; set => ip = value; }
         public string Port { get => port; set => port = value; }
         public bool AutoConnect { get => autoConnect; set => autoConnect = value; }
-        public string FilePath { get => filePath; set => filePath = value; }
+        public static string FilePath { get => filePath; set => filePath = value; }
 
         public Settings(string ip, string port, bool autoConnect)
         {

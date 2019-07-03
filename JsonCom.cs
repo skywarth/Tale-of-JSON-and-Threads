@@ -19,12 +19,12 @@ namespace task1
                 List<Settings> items = JsonConvert.DeserializeObject<List<Settings>>(json);
             }
         }*/
-        private string SerializeObject(Settings o)
+        private string SerializeObject(Object o)
         {
             string jsonText="";
             if (o.GetType() == typeof(Settings)){
                 MessageBox.Show("test");
-                jsonText = JsonConvert.SerializeObject(o, Formatting.Indented);
+                jsonText = JsonConvert.SerializeObject(o, Formatting.None);
             }
             else
             {
@@ -33,7 +33,7 @@ namespace task1
             return jsonText;
         }
 
-        public bool SerializeJSON(Settings o)
+        /*public bool SerializeJSON(Object o)
         {
             bool status=false;
             JsonSerializer serializer = new JsonSerializer();
@@ -47,7 +47,7 @@ namespace task1
             {
                 try
                 {
-                    using (StreamWriter file = File.CreateText(o.FilePath))
+                    using (StreamWriter file = File.CreateText(Settings.FilePath))
                     {
 
                         serializer.Serialize(file, jsonText);
@@ -62,11 +62,39 @@ namespace task1
                 }
             }
             return status;
+        }*/
+        public bool SerializeJSON(Object o)
+        {
+            bool status = false;
+            try
+            {
+                using (StreamWriter file = File.CreateText(Settings.FilePath))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(file, o);
+                    status = true;
+                }
+            }catch(Exception ex)
+            {
+                status= false;
+                MessageBox.Show(ex.ToString());
+
+            }
+            return status;
+
+            
         }
 
-        public Settings DeserializeJSON()
-        {
 
+            public object DeserializeJSON()
+        {
+            using (StreamReader file = File.OpenText(Settings.FilePath))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                Settings s= (Settings)serializer.Deserialize(file, typeof(Settings)); 
+                return s;
+            }
+            
         }
 
     }
