@@ -21,11 +21,7 @@ namespace task1
         {
             InitializeComponent();
             
-            Settings currSet=(Settings)j.DeserializeJSON();
-            if (currSet.AutoConnect)
-            {
-
-            }
+            
         }
 
         private void Label1_Click(object sender, EventArgs e)
@@ -66,7 +62,6 @@ namespace task1
         private void Button2_Click(object sender, EventArgs e)
         {
             
-            j.DeserializeJSON();
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -77,7 +72,15 @@ namespace task1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            loadCheck();
+        }
+        private void loadCheck()
+        {
+            Settings currSet = (Settings)j.DeserializeJSON();
+            if (currSet.AutoConnect)
+            {
+                SetSettingFields(currSet);
+            }
         }
     }
 }
