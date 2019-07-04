@@ -13,12 +13,15 @@ namespace task1
     public class StateObject
     {
         // Client socket.  
-        public Socket workSocket = null;
+        private Socket workSocket = null;
         // Size of receive buffer.  
         public const int BufferSize = 256;
         // Receive buffer.  
-        public byte[] buffer = new byte[BufferSize];
+        private byte[] buffer = new byte[BufferSize];
         // Received data string.  
         public StringBuilder sb = new StringBuilder();
+
+        public Socket WorkSocket { get => workSocket; set => workSocket = value; }
+        public byte[] Buffer { get => buffer; set => buffer = value; }
     }
 }

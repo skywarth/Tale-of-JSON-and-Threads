@@ -89,10 +89,10 @@ namespace task1
             {
                 // Create the state object.  
                 StateObject state = new StateObject();
-                state.workSocket = client;
+                state.WorkSocket = client;
 
                 // Begin receiving the data from the remote device.  
-                client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
+                client.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0,
                     new AsyncCallback(ReceiveCallback), state);
             }
             catch (Exception e)
@@ -108,7 +108,7 @@ namespace task1
                 // Retrieve the state object and the client socket   
                 // from the asynchronous state object.  
                 StateObject state = (StateObject)ar.AsyncState;
-                Socket client = state.workSocket;
+                Socket client = state.WorkSocket;
 
                 // Read data from the remote device.  
                 int bytesRead = client.EndReceive(ar);
@@ -116,10 +116,10 @@ namespace task1
                 if (bytesRead > 0)
                 {
                     // There might be more data, so store the data received so far.  
-                    state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
+                    state.sb.Append(Encoding.ASCII.GetString(state.Buffer, 0, bytesRead));
 
                     // Get the rest of the data.  
-                    client.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
+                    client.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0,
                         new AsyncCallback(ReceiveCallback), state);
                 }
                 else
