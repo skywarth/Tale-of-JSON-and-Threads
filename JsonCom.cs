@@ -11,15 +11,8 @@ namespace task1
 {
     class JsonCom
     {
-        /*public void LoadJson()
-        {
-            using (StreamReader r = new StreamReader("file.json"))
-            {
-                string json = r.ReadToEnd();
-                List<Settings> items = JsonConvert.DeserializeObject<List<Settings>>(json);
-            }
-        }*/
-        private string SerializeObject(Object o)
+        
+       /* private string SerializeObject(Object o)
         {
             string jsonText="";
             if (o.GetType() == typeof(Settings)){
@@ -32,37 +25,8 @@ namespace task1
             }
             return jsonText;
         }
-
-        /*public bool SerializeJSON(Object o)
-        {
-            bool status=false;
-            JsonSerializer serializer = new JsonSerializer();
-            string jsonText=SerializeObject(o);
-            if (String.IsNullOrEmpty(jsonText))
-            {
-                status = false;
-                
-            }
-            else
-            {
-                try
-                {
-                    using (StreamWriter file = File.CreateText(Settings.FilePath))
-                    {
-
-                        serializer.Serialize(file, jsonText);
-                        status = true;
-                    }
-                    
-                }
-                catch (Exception ex)
-                {
-                    status = false;
-                    MessageBox.Show(ex.ToString());
-                }
-            }
-            return status;
-        }*/
+        */
+        
         public static bool SerializeJSON(Object o)
         {
             bool status = false;
