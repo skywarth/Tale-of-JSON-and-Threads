@@ -19,7 +19,7 @@ namespace task1
     public delegate void ThreadStart();
     public partial class Form1 : Form
     {
-        JsonCom j = new JsonCom();
+        
         public Form1()
         {
             InitializeComponent();
@@ -71,10 +71,7 @@ namespace task1
 
         
 
-        private void Button2_Click(object sender, EventArgs e)
-        {
-            /**/
-        }
+        
 
         private void Button1_Click(object sender, EventArgs e)
         {
