@@ -48,7 +48,8 @@ namespace task1
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            
+            AsynchronousClient.close();
+
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -73,8 +74,9 @@ namespace task1
 
         private void Button3_Click(object sender, EventArgs e)
         {
-            Connection con = new Connection();
-            con.ExecuteClientSocket(Settings.GetSettingFields(textBox1,textBox2,checkBox1));
+            AsynchronousClient.StartClient();
+            /*Connection con = new Connection();
+            con.ExecuteClientSocket(Settings.GetSettingFields(textBox1,textBox2,checkBox1));*/
         }
     }
 }
