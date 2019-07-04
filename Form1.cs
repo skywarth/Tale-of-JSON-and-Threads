@@ -48,8 +48,7 @@ namespace task1
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            AsynchronousClient.close();
-
+            
         }
 
         private void Button1_Click(object sender, EventArgs e)
