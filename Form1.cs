@@ -69,8 +69,9 @@ namespace task1
         }
         private void InitializeThreads()
         {
-
-            Thread k=ThreadController.UIThreadCreate(InterfaceUpdate);
+            Thread UIThread = new Thread(InterfaceUpdate);
+            UIThread.IsBackground = true;
+            UIThread.Start();
 
         }
         private void loadCheck()

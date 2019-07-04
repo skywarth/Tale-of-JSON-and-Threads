@@ -10,12 +10,12 @@ using System.Threading;
     class ThreadController
     {
         
-        public static Thread UIThreadCreate(ParameterizedThreadStart t)
+        /*public static Thread UIThreadCreate(ParameterizedThreadStart t)
         {
         Thread UIThread = new Thread(() => t);
             UIThread.IsBackground = true;
             return UIThread;
-        }
+        }*/
 
 
    }
