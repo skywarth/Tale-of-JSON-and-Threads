@@ -19,12 +19,12 @@ namespace task1
     public delegate void ThreadStart();
     public partial class Form1 : Form
     {
-        
+        Thread connectionThread;
         public Form1()
         {
             InitializeComponent();
-            
-            
+            connectionThread = new Thread(MakeConnection);
+
         }
 
         private void Label1_Click(object sender, EventArgs e)
@@ -75,7 +75,7 @@ namespace task1
 
         private void Button1_Click(object sender, EventArgs e)
         {
-             Thread connectionThread = new Thread(MakeConnection);
+             
             connectionThread.Start();
             
 
@@ -83,7 +83,6 @@ namespace task1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //loadCheck();
             InitializeThreads();
 
         }
@@ -98,15 +97,6 @@ namespace task1
 
 
 
-        }
-        private void loadCheck()
-        {
-            /*Settings currSet = (Settings)j.DeserializeJSON();
-            if (currSet.AutoConnect)
-            {
-                Settings.SetSettingFields(currSet,textBox1,textBox2,checkBox1);
-            }*/
-            
         }
 
         private void InterfaceUpdate() {
