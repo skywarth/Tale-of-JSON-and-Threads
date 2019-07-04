@@ -92,7 +92,7 @@ namespace task1
                 state.WorkSocket = client;
 
                 // Begin receiving the data from the remote device.  
-                client.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0,
+                client.BeginReceive(state.Buffer, 0, StateObject.BufferSize1, 0,
                     new AsyncCallback(ReceiveCallback), state);
             }
             catch (Exception e)
@@ -119,7 +119,7 @@ namespace task1
                     state.sb.Append(Encoding.ASCII.GetString(state.Buffer, 0, bytesRead));
 
                     // Get the rest of the data.  
-                    client.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0,
+                    client.BeginReceive(state.Buffer, 0, StateObject.BufferSize1, 0,
                         new AsyncCallback(ReceiveCallback), state);
                 }
                 else
