@@ -63,7 +63,7 @@ namespace task1
             }
             return status;
         }*/
-        public bool SerializeJSON(Object o)
+        public static bool SerializeJSON(Object o)
         {
             bool status = false;
             try
@@ -86,7 +86,7 @@ namespace task1
         }
 
 
-            public object DeserializeJSON()
+            public static object DeserializeJSON()
         {
             using (StreamReader file = File.OpenText(Settings.FilePath))
             {
