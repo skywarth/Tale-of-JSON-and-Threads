@@ -34,17 +34,39 @@ namespace task1
 
         private void MakeConnection()
         {
+            if (checkBox1.Checked)
+            {
+
+
+                autoConnect();
+            }
+                string info=null;
+                try{
+                    AsynchronousClient.StartClient();
+                    info = "success";
+                }
+                catch(Exception ex){
+                    info = ex.ToString();
+                }
+                finally{
+                    MessageBox.Show(info);
+                }
+                
             
-            bool serializeStatus=JsonCom.SerializeJSON(Settings.GetSettingFields(textBox1,textBox2,checkBox1));
+            
+            
+        }
+
+        private void autoConnect()
+        {
+            bool serializeStatus = JsonCom.SerializeJSON(Settings.GetSettingFields(textBox1, textBox2, checkBox1));
             if (serializeStatus)
             {
-                MessageBox.Show("success");
             }
             else
             {
-                MessageBox.Show("Error");
+                throw new Exception("Error occured");
             }
-            
         }
 
         
@@ -56,8 +78,9 @@ namespace task1
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            Proc demoProc = new Proc(MakeConnection);
-            demoProc();
+             Thread connectionThread = new Thread(MakeConnection);
+            connectionThread.Start();
+            
 
         }
 
@@ -69,9 +92,14 @@ namespace task1
         }
         private void InitializeThreads()
         {
+            
+
+
             Thread UIThread = new Thread(InterfaceUpdate);
             UIThread.IsBackground = true;
             UIThread.Start();
+
+
 
         }
         private void loadCheck()
