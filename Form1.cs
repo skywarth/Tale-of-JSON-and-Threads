@@ -24,7 +24,8 @@ namespace task1
         {
             InitializeComponent();
             //ThreadController.ConnectionThread = new Thread(MakeConnection);
-            Thread t=ThreadController.ConnectionThreadCreate(MakeConnection);
+            InitializeThreads();
+            
 
         }
 
@@ -84,19 +85,18 @@ namespace task1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            InitializeThreads();
-
+            ThreadController.UIThread.Start();
         }
         private void InitializeThreads()
         {
-            
 
 
-            Thread UIThread = new Thread(InterfaceUpdate);
+
+            /*Thread UIThread = new Thread(InterfaceUpdate);
             UIThread.IsBackground = true;
-            UIThread.Start();
-
-
+            UIThread.Start();*/
+            ThreadController.UIThreadCreate(InterfaceUpdate);
+            ThreadController.ConnectionThreadCreate(MakeConnection);
 
         }
 
