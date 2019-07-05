@@ -4,6 +4,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace task1
 {
@@ -37,28 +38,32 @@ namespace task1
                 IPEndPoint remoteEP = new IPEndPoint(ipAddress, int.Parse(s.Port));
 
                 // Create a TCP/IP socket.  
+                
                 Socket client = new Socket(ipAddress.AddressFamily,
                     SocketType.Stream, ProtocolType.Tcp);
-
+                Debug.WriteLine("Created client object");
                 // Connect to the remote endpoint.  
                 client.BeginConnect(remoteEP,
                     new AsyncCallback(ConnectCallback), client);
                 connectDone.WaitOne();
-
+                Debug.WriteLine("Begin object done");
                 // Send test data to the remote device.  
                 Send(client, "This is a test<EOF>");
+                Debug.WriteLine("MSG sent");
                 sendDone.WaitOne();
 
                 // Receive the response from the remote device.  
                 Receive(client);
                 receiveDone.WaitOne();
-
+                Debug.WriteLine("Receive done");
                 // Write the response to the console.  
                 Console.WriteLine("Response received : {0}", response);
                 MessageBox.Show(response+" @@@"+ipAddress);
                 // Release the socket.  
                 client.Shutdown(SocketShutdown.Both);
+                Debug.WriteLine("Shutdown");
                 client.Close();
+                Debug.WriteLine("client close");
 
             }
             catch (Exception e)

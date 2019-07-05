@@ -9,9 +9,7 @@ using System.Threading.Tasks;*/
 using System.Windows.Forms;
 //
 using System.Threading;
-
-
-
+using System.Diagnostics;
 
 namespace task1
 {
@@ -81,14 +79,16 @@ namespace task1
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            if (ThreadController.ConnectionThread.IsAlive)
+            /*if (ThreadController.ConnectionThread.IsAlive)
             {
-                
+                Debug.WriteLine("thread alive");
             }
             else
             {
                 InitializeThreads();
-            }
+                Debug.WriteLine("Re initiate thread");
+            }*/
+            InitializeThreads();
             ThreadController.ConnectionThread.Start();
 
         }
