@@ -103,8 +103,14 @@ namespace task1
             UIThread.Start();*/
 
             //PROBLEM
+            /*
+             * ORIGINAL
             ThreadController.UIThreadCreate(()=>InterfaceUpdate());
             Settings s= (Settings)JsonCom.DeserializeJSON();
+            */
+            ThreadController.UIThreadCreate(() => InterfaceUpdate());
+            ThreadController.JSONDeserThreadCreate(()=>ThreadController.JSONDeserLocker());
+            Settings s = ThreadController.JSONDeserLocker();
 
             if (s != null && s.AutoConnect)
             {
@@ -125,7 +131,7 @@ namespace task1
 
         private Settings InterfaceUpdate() {
 
-            Settings currSet = (Settings)JsonCom.DeserializeJSON();
+            Settings currSet = ThreadController.JSONDeserLocker();
             if (currSet !=null && currSet.AutoConnect)
             {
                 Settings.SetSettingFields(currSet, textBox1, textBox2, checkBox1);

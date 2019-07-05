@@ -12,7 +12,7 @@ namespace task1
 {
     class JsonCom
     {
-        
+
         /* private string SerializeObject(Object o)
          {
              string jsonText="";
@@ -27,6 +27,10 @@ namespace task1
              return jsonText;
          }
          */
+
+        //private static Settings latestSettings;
+
+        //public Settings LatestSettings { get => latestSettings;}
 
         public static bool SerializeJSON(Object o)
         {
@@ -58,7 +62,8 @@ namespace task1
             using (StreamReader file = File.OpenText(Settings.FilePath))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                Settings s= (Settings)serializer.Deserialize(file, typeof(Settings)); 
+                Settings s= (Settings)serializer.Deserialize(file, typeof(Settings));
+                //latestSettings = s;
                 return s;
             }
             
