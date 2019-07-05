@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+/*using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks;*/
 using System.Windows.Forms;
 //
 using System.Threading;
@@ -19,11 +19,12 @@ namespace task1
     public delegate void ThreadStart();
     public partial class Form1 : Form
     {
-        Thread connectionThread;
+        //Thread connectionThread;
         public Form1()
         {
             InitializeComponent();
-            connectionThread = new Thread(MakeConnection);
+            //ThreadController.ConnectionThread = new Thread(MakeConnection);
+            Thread t=ThreadController.ConnectionThreadCreate(MakeConnection);
 
         }
 
@@ -76,7 +77,7 @@ namespace task1
         private void Button1_Click(object sender, EventArgs e)
         {
              
-            connectionThread.Start();
+            ThreadController.ConnectionThread.Start();
             
 
         }
