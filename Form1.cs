@@ -36,12 +36,16 @@ namespace task1
 
         private void MakeConnection()
         {
-            if (checkBox1.Checked)
-            {
-
-
-                autoConnect();
-            }
+              try
+                {
+                    saveSettings();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            
+            
                 string info=null;
                 try{
                     AsynchronousClient.StartClient();
@@ -59,9 +63,9 @@ namespace task1
             
         }
 
-        private void autoConnect()
+        private void saveSettings()
         {
-            bool serializeStatus = JsonCom.SerializeJSON(Settings.GetSettingFields(textBox1, textBox2, checkBox1));
+           bool serializeStatus = JsonCom.SerializeJSON(Settings.GetSettingFields(textBox1, textBox2, checkBox1));
             if (serializeStatus)
             {
             }
@@ -108,11 +112,6 @@ namespace task1
             }
         }
 
-        private void Button3_Click(object sender, EventArgs e)
-        {
-            AsynchronousClient.StartClient();
-            /*Connection con = new Connection();
-            con.ExecuteClientSocket(Settings.GetSettingFields(textBox1,textBox2,checkBox1));*/
-        }
+        
     }
 }

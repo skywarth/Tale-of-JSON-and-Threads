@@ -24,7 +24,6 @@ namespace task1
     class Connection
         
     {
-        Thread a = new Thread(() => Receive(null));
         //System.Net.Sockets.TcpClient clientSocket = new System.Net.Sockets.TcpClient();
         private static ManualResetEvent connectDone = new ManualResetEvent(false);
 
