@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -15,14 +16,15 @@ class ThreadController
         {
                 _UIThread = new Thread(t);
                 _UIThread.IsBackground = true;
+                Debug.WriteLine("UIThread has been created");
                 return _UIThread;
         }
         public static Thread ConnectionThreadCreate(ThreadStart t)
         {
             _connectionThread = new Thread(t);
             _connectionThread.IsBackground = true;
-            
-            return _connectionThread;
+        Debug.WriteLine("Connection thread has been created");
+        return _connectionThread;
         }
         
         

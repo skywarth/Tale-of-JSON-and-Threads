@@ -147,7 +147,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
+            this.button1.Text = "Connect";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
@@ -182,7 +182,6 @@
             this.label1.Size = new System.Drawing.Size(17, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "IP";
-            this.label1.Click += new System.EventHandler(this.Label1_Click);
             // 
             // Form1
             // 

@@ -27,11 +27,6 @@ namespace task1
 
         }
 
-        private void Label1_Click(object sender, EventArgs e)
-        {
-            /**/
-        }
-
         private void MakeConnection(Settings s)
         {
               try
@@ -46,6 +41,7 @@ namespace task1
             
                 string info=null;
                 try{
+                
                     AsynchronousClient.StartClient(s);
                     info = "success";
                 }
@@ -56,9 +52,6 @@ namespace task1
                     MessageBox.Show(info);
                 }
             
-
-
-
         }
 
         private void saveSettings()
@@ -88,6 +81,8 @@ namespace task1
                 InitializeThreads();
                 Debug.WriteLine("Re initiate thread");
             }*/
+
+
             InitializeThreads();
             ThreadController.ConnectionThread.Start();
 
@@ -101,19 +96,37 @@ namespace task1
         {
 
 
-
+            StackTrace stackTrace = new StackTrace();
+            Debug.WriteLine("Form1 initializeThreads called by " + stackTrace.GetFrame(1).GetMethod().Name);
             /*Thread UIThread = new Thread(InterfaceUpdate);
             UIThread.IsBackground = true;
             UIThread.Start();*/
+
+            //PROBLEM
             ThreadController.UIThreadCreate(()=>InterfaceUpdate());
             Settings s= (Settings)JsonCom.DeserializeJSON();
-            ThreadController.ConnectionThreadCreate(()=>MakeConnection(s));
+
+            if (s != null && s.AutoConnect)
+            {
+                ThreadController.ConnectionThreadCreate(() => MakeConnection(s));
+                ThreadController.ConnectionThread.Start();
+            }
+            else
+            {
+                ThreadController.ConnectionThreadCreate(() => MakeConnection(Settings.GetSettingFields(textBox1, textBox2, checkBox1)));
+            }
+
+            
+            
+
+
 
         }
 
         private Settings InterfaceUpdate() {
+
             Settings currSet = (Settings)JsonCom.DeserializeJSON();
-            if (currSet.AutoConnect)
+            if (currSet !=null && currSet.AutoConnect)
             {
                 Settings.SetSettingFields(currSet, textBox1, textBox2, checkBox1);
             }
