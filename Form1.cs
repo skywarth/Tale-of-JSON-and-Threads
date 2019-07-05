@@ -34,7 +34,7 @@ namespace task1
             /**/
         }
 
-        private void MakeConnection()
+        private void MakeConnection(Settings s)
         {
               try
                 {
@@ -48,7 +48,7 @@ namespace task1
             
                 string info=null;
                 try{
-                    AsynchronousClient.StartClient();
+                    AsynchronousClient.StartClient(s);
                     info = "success";
                 }
                 catch(Exception ex){
@@ -57,10 +57,10 @@ namespace task1
                 finally{
                     MessageBox.Show(info);
                 }
-                
             
-            
-            
+
+
+
         }
 
         private void saveSettings()
@@ -81,9 +81,15 @@ namespace task1
 
         private void Button1_Click(object sender, EventArgs e)
         {
-             
+            if (ThreadController.ConnectionThread.IsAlive)
+            {
+                
+            }
+            else
+            {
+                InitializeThreads();
+            }
             ThreadController.ConnectionThread.Start();
-            
 
         }
 
@@ -99,17 +105,19 @@ namespace task1
             /*Thread UIThread = new Thread(InterfaceUpdate);
             UIThread.IsBackground = true;
             UIThread.Start();*/
-            ThreadController.UIThreadCreate(InterfaceUpdate);
-            ThreadController.ConnectionThreadCreate(MakeConnection);
+            ThreadController.UIThreadCreate(()=>InterfaceUpdate());
+            Settings s= (Settings)JsonCom.DeserializeJSON();
+            ThreadController.ConnectionThreadCreate(()=>MakeConnection(s));
 
         }
 
-        private void InterfaceUpdate() {
+        private Settings InterfaceUpdate() {
             Settings currSet = (Settings)JsonCom.DeserializeJSON();
             if (currSet.AutoConnect)
             {
                 Settings.SetSettingFields(currSet, textBox1, textBox2, checkBox1);
             }
+            return currSet;
         }
 
         

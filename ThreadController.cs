@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
+using System.Windows.Forms;
 
-
-    class ThreadController
+class ThreadController
     {
         private static Thread _connectionThread;
         private static Thread _UIThread;
@@ -21,6 +21,7 @@ using System.Threading;
         {
             _connectionThread = new Thread(t);
             _connectionThread.IsBackground = true;
+            
             return _connectionThread;
         }
         

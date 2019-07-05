@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace task1
 {
 
-    public class AsynchronousClient
+    class AsynchronousClient
     {
         // The port number for the remote device.  
         private const int port = 443;
@@ -24,7 +24,7 @@ namespace task1
         // The response from the remote device.  
         private static String response = String.Empty;
 
-        public static void StartClient()
+        public static void StartClient(Settings s)
         {
             // Connect to a remote device.  
             try
@@ -32,9 +32,9 @@ namespace task1
                 // Establish the remote endpoint for the socket.  
                 // The name of the   
                 // remote device is "host.contoso.com".  
-                IPHostEntry ipHostInfo = Dns.GetHostEntry("88.198.55.153");
-                IPAddress ipAddress = ipHostInfo.AddressList[0];
-                IPEndPoint remoteEP = new IPEndPoint(ipAddress, port);
+                IPHostEntry ipHostInfo = Dns.GetHostEntry("yigit.kim");
+                IPAddress ipAddress = IPAddress.Parse(s.Ip);//ipHostInfo.AddressList[0];
+                IPEndPoint remoteEP = new IPEndPoint(ipAddress, int.Parse(s.Port));
 
                 // Create a TCP/IP socket.  
                 Socket client = new Socket(ipAddress.AddressFamily,
@@ -55,7 +55,7 @@ namespace task1
 
                 // Write the response to the console.  
                 Console.WriteLine("Response received : {0}", response);
-                MessageBox.Show(response);
+                MessageBox.Show(response+" @@@"+ipAddress);
                 // Release the socket.  
                 client.Shutdown(SocketShutdown.Both);
                 client.Close();
@@ -63,7 +63,7 @@ namespace task1
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                throw new Exception(e.ToString());
             }
         }
 
