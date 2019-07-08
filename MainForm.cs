@@ -58,7 +58,7 @@ namespace task1
                 string info=null;
                 try{
                 
-                    AsynchronousClient.StartClient(s);
+                    Connection.StartClient(s);
                     info = "success";
                 }
                 catch(Exception ex){

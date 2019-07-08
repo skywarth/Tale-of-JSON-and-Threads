@@ -21,7 +21,7 @@ namespace task1
         // Received data string.  
         public StringBuilder sb = new StringBuilder();
     }*/
-    class Connection
+    class Connection2
         
     {
         //System.Net.Sockets.TcpClient clientSocket = new System.Net.Sockets.TcpClient();

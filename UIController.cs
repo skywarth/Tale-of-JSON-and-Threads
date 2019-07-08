@@ -82,7 +82,7 @@ namespace task1
             try
             {
 
-                AsynchronousClient.StartClient(s);
+                Connection.StartClient(s);
                 info = "success";
             }
             catch (Exception ex)

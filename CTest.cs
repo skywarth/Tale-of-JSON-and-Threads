@@ -9,7 +9,7 @@ using System.Diagnostics;
 namespace task1
 {
 
-    class AsynchronousClient
+    class Connection
     {
         // The port number for the remote device.  
         private const int port = 443;

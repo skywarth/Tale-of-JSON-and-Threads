@@ -22,8 +22,8 @@ namespace task1
         {
             public _SystemStartUp SystemStartUp = new _SystemStartUp();
 
-           
-          
+            
+            
 
         }
         public static _SystemStatus SystemStatus = new _SystemStatus();
