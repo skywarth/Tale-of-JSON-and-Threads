@@ -16,12 +16,11 @@ namespace task1
 
         public class _MsStt
         {
-            private string Tcp_Ip { get; set; } = "0.0.0.0";
-            private string _IP;
-            private string _Port;
-            private bool _autoConnect;
+            public string Tcp_Ip { get; set; } = "0.0.0.0";            
+            public int Port { get; set; }
+            public bool AutoConnect { get; set; }
 
-            private static string filePath = @"..\settings.json";
+           
         }
 
 
