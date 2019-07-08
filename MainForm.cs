@@ -15,17 +15,33 @@ namespace task1
 {
     delegate void Proc();
     public delegate void ThreadStart();
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         //Thread connectionThread;
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             //ThreadController.ConnectionThread = new Thread(MakeConnection);
             InitializeThreads();
             
-
+            
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            MainClass.PrepareClass();
+
+
+            ThreadController.UIThread.Start();
+        }
+
+
+
+        
+
+        //**************************************************************************************************************
+
+
 
         private void MakeConnection(Settings s)
         {
@@ -88,10 +104,7 @@ namespace task1
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            ThreadController.UIThread.Start();
-        }
+        
         private void InitializeThreads()
         {
 
@@ -104,13 +117,13 @@ namespace task1
 
             //PROBLEM
             /*
-             * ORIGINAL
+             * Original
             ThreadController.UIThreadCreate(()=>InterfaceUpdate());
             Settings s= (Settings)JsonCom.DeserializeJSON();
             */
+
             ThreadController.UIThreadCreate(() => InterfaceUpdate());
-            ThreadController.JSONDeserThreadCreate(()=>ThreadController.JSONDeserLocker());
-            Settings s = ThreadController.JSONDeserLocker();
+            Settings s = (Settings)JsonCom.DeserializeJSON();
 
             if (s != null && s.AutoConnect)
             {
@@ -131,14 +144,24 @@ namespace task1
 
         private Settings InterfaceUpdate() {
 
-            Settings currSet = ThreadController.JSONDeserLocker();
+            Settings currSet = (Settings)JsonCom.DeserializeJSON();
             if (currSet !=null && currSet.AutoConnect)
             {
                 Settings.SetSettingFields(currSet, textBox1, textBox2, checkBox1);
             }
             return currSet;
         }
+        private Settings InterfaceUpdate(Settings s)
+        {
 
-        
+            
+            if (s != null && s.AutoConnect)
+            {
+                Settings.SetSettingFields(s, textBox1, textBox2, checkBox1);
+            }
+            return s;
+        }
+
+
     }
 }
