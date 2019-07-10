@@ -170,33 +170,19 @@ namespace task1Mirror
             return unchecked((byte)longSum);
         }
         /**/
-        void CheckRevSyntax(byte[] data)
+        Settings._result CheckRevSyntax(byte[] data)
         {
             /**/
-            int adet = stream.Read(data, 0, data.Length);
-            
-            int iterator = 0;
-            int size = data.Length+1;//increment for correct size, since .length gives 3 for a 4 element array.
-            int infactCounter = 0;
+            //int adet = stream.Read(data, 0, data.Length);
+            int size = data.Length;
             Settings._result rslt = new Settings._result();
 
-            Type type = typeof(ComTitles);
-            int NumberOfConst = type.GetProperties().Length;
-
+            //Type type = typeof(ComTitles);
+            int NumberOfConst =5 /*type.GetFields().Length*/;
             byte[] InfactData = new byte[size-NumberOfConst];
 
             try
             {
-                /*for (iterator = 0; iterator < adet; iterator++)
-                {
-                    if(iterator)
-
-                }*/
-
-                /*if (iterator == 0)
-                {
-                    
-                }*/
 
                 if (data[0] == ComTitles.Head)// first head check
                 {
@@ -227,7 +213,7 @@ namespace task1Mirror
                 rslt.Succes = false;
                 rslt.Message = ex.ToString();
             }
-
+            return rslt;
             /**/
         }
 
