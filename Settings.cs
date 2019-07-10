@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace task1
+namespace task1Mirror
 {
     public class Settings
     {

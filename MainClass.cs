@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace task1
+namespace task1Mirror
 {
     public class MainClass
     {
@@ -15,13 +15,16 @@ namespace task1
             public Settings._result DynamicSettingsGet = new Settings._result();
 
 
+            /**/
+            public Communication._result commStatus = new Communication._result();
+
 
         }
 
         public class _SystemStatus
         {
             public _SystemStartUp SystemStartUp = new _SystemStartUp();
-
+            
             
             
 
@@ -31,8 +34,9 @@ namespace task1
 
         #region Objects
 
-        public static Connection Con_ = new Connection();
+        //public static Connection Con_ = new Connection();//original
 
+        //public static Communication Con_ = new Communication();
 
         #endregion
 
@@ -52,7 +56,9 @@ namespace task1
             // MainControl'u calistiriyorum.
             Th_MainControl = new Thread(MainControl);
             Th_MainControl.Start();
-            
+            /**/
+            Th_MainControl2 = new Thread(MainControl2);
+            Th_MainControl2.Start();
         }
 
         //*******************************************************************************************************
@@ -63,6 +69,9 @@ namespace task1
 
         static Thread Th_MainControl;
         static int MainControlInterval = 250;
+        /**/
+        static Thread Th_MainControl2;
+        static int MainControl2Interval = 1000;
         /// <summary>
         /// MainClass'ta nesne kontrollerini saglar. Th_MainControl Thread'i icinde calisir.
         /// </summary>
@@ -73,7 +82,7 @@ namespace task1
                 try
                 {
                     if(Settings.DynamicStt.MsStt.AutoConnect)
-                    {
+                    { 
                         //if(!SystemStatus.)
                         //{
                         //    Con_.ConnectToMS();
@@ -95,7 +104,48 @@ namespace task1
 
 
         }
+        static void MainControl2()
+        {
+            while (true)
+            {
+                try
+                {
+                    if(!Communication.connectionStatus)
+                    {
+                        Communication.ConnectTCP();
+                        
+                    }
+                    if (!Communication.listenStatus)
+                    {
+                        Communication.ListenTCP();
+                        
 
+                    }
+                    //Communication.ReceiveMessage();
+                    //apply async for receive 
+                    Communication.ClearBufferHead();
+                    
+
+                    Communication.PopulateBuffer();
+                    Communication.FinalizeBuffer();
+                    Communication.SendBuffer();
+                    
+
+
+
+
+
+
+                }
+                catch (Exception)
+                {
+                }
+
+                Thread.Sleep(MainControl2Interval);
+            }
+
+
+        }
 
 
         #endregion

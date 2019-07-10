@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace task1
+namespace task1Mirror
 {
     // State object for receiving data from remote device.  
     public class StateObject

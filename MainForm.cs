@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
 
-namespace task1
+namespace task1Mirror
 {
     delegate void Proc();
     public delegate void ThreadStart();
@@ -32,7 +32,7 @@ namespace task1
             MainClass.PrepareClass();
 
 
-            ThreadController.UIThread.Start();
+            //ThreadController.UIThread.Start();
         }
 
 
@@ -43,7 +43,7 @@ namespace task1
 
 
 
-        private void MakeConnection(Settings s)
+       /* private void MakeConnection(Settings s)
         {
               try
                 {
@@ -68,9 +68,9 @@ namespace task1
                     MessageBox.Show(info);
                 }
             
-        }
+        }*/
 
-        private void saveSettings()
+        /*private void saveSettings()
         {
            bool serializeStatus = JsonCom.SerializeJSON(Settings.GetSettingFields(textBox1, textBox2, checkBox1));
             if (serializeStatus)
@@ -80,7 +80,7 @@ namespace task1
             {
                 throw new Exception("Error occured");
             }
-        }
+        }*/
 
         
 
@@ -99,8 +99,15 @@ namespace task1
             }*/
 
 
-            InitializeThreads();
-            ThreadController.ConnectionThread.Start();
+            //InitializeThreads();
+            //ThreadController.ConnectionThread.Start();
+
+
+            /*Communication.MakeConnection();
+            Communication.PopulateBuffer("testaa");
+            Communication.FinalizeBuffer();
+            Communication.sendBuffer();
+            Communication.ClearBufferHead();*/
 
         }
 
@@ -108,7 +115,7 @@ namespace task1
         private void InitializeThreads()
         {
 
-
+            
             StackTrace stackTrace = new StackTrace();
             Debug.WriteLine("Form1 initializeThreads called by " + stackTrace.GetFrame(1).GetMethod().Name);
             /*Thread UIThread = new Thread(InterfaceUpdate);
@@ -122,6 +129,9 @@ namespace task1
             Settings s= (Settings)JsonCom.DeserializeJSON();
             */
 
+
+
+            /*
             ThreadController.UIThreadCreate(() => InterfaceUpdate());
             Settings s = (Settings)JsonCom.DeserializeJSON();
 
@@ -135,32 +145,37 @@ namespace task1
                 ThreadController.ConnectionThreadCreate(() => MakeConnection(Settings.GetSettingFields(textBox1, textBox2, checkBox1)));
             }
 
-            
+            */
             
 
 
 
         }
 
-        private Settings InterfaceUpdate() {
-
-            Settings currSet = (Settings)JsonCom.DeserializeJSON();
-            if (currSet !=null && currSet.AutoConnect)
-            {
-                Settings.SetSettingFields(currSet, textBox1, textBox2, checkBox1);
-            }
-            return currSet;
-        }
-        private Settings InterfaceUpdate(Settings s)
+        private void Button2_Click(object sender, EventArgs e)
         {
-
-            
-            if (s != null && s.AutoConnect)
-            {
-                Settings.SetSettingFields(s, textBox1, textBox2, checkBox1);
-            }
-            return s;
+            Communication.closeConnection();
         }
+
+        /*  private Settings InterfaceUpdate() {
+
+              Settings currSet = (Settings)JsonCom.DeserializeJSON();
+              if (currSet !=null && currSet.AutoConnect)
+              {
+                  Settings.SetSettingFields(currSet, textBox1, textBox2, checkBox1);
+              }
+              return currSet;
+    }*/
+        /* private Settings InterfaceUpdate(Settings s)
+         {
+
+
+             if (s != null && s.AutoConnect)
+             {
+                 Settings.SetSettingFields(s, textBox1, textBox2, checkBox1);
+             }
+             return s;
+    }*/
 
 
     }
